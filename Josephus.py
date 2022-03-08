@@ -127,6 +127,15 @@ def main():
 
   # your code
   CirularList = CircularList()
+  circularList = CircularList()
+  for i in range ( num_soldiers ):
+        circularList.insert(i)
+  start = circularList.find( start_count )
+
+  while num_soldiers > 1:
+        eliminated, start = circularList.delete_after ( start, elim_num )
+        num_soldiers -= 1
+        print( eliminated )
 
 if __name__ == "__main__":
   main()
