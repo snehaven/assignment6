@@ -48,19 +48,66 @@ class CircularList(object):
   # Delete a Link with a given data (value) and return the Link
   # or return None if the data is not there
   def delete ( self, data ):
-      pass
+      current = self.first
+    if current.next != None:
+      if current.data == data:
+        current.next.previous = None
+        self.first = current.next
+        current.next = None
+        return current
+      else:
+        while current.next != None:
+          if current.data == data:
+            break
+          else:
+            current = current.next
+        if current.next != None:   
+          current.previous.next = current.next
+          current.next.previous = current.previous
+          current.previous = None
+          current.next = None
+        else:
+          current.previous.next = None
+          current.previous = None
+        return current
+    
+    if current == None:
+      return None
 
   # Delete the nth Link starting from the Link start
   # Return the data of the deleted Link AND return the
   # next Link after the deleted Link in that order
   def delete_after ( self, start, n ):
-      pass
+      current = start
+    print( start.next )
+    
+    for j in range ( n ):
+        if current.next != None:
+            current = current.next
+    if current.next != None:
+        current.before.next = current.next
+        current.next.before = current.before
+        current.before = None
+        current.next = None
+        return current.data, current.next
+    else:
+        current.before.next = None
+        current.before = None
+        return current.data, None
 
   # Return a string representation of a Circular List
   # The format of the string will be the same as the __str__
   # format for normal Python lists
   def __str__ ( self ):
-      return str(self.first)
+    strng =""
+    current = self.first
+    strng += str(current.data) + ' <-> '
+    current = current.next
+    while(current.next != self.first and current.next != None):
+      strng += str(current.data) + ' <-> '
+      current = current.next
+    strng += str(current.data) + ' <-> '
+    return strng
 
 def main():
   # read number of soldiers
