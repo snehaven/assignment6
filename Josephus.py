@@ -10,12 +10,14 @@ class Link(object):
   # Return the data of the deleted Link AND return the
   # next Link after the deleted Link in that order
     def __str__(self):
-        stringrep = str(self.data) + " --> " + str(self.next.data) + " --> "
+        lst = [self.data, self.next.data]
+        #stringrep = str(self.data) + " --> " + str(self.next.data) + " --> "
         current = self.next
         while (current.next.data is not self.data):
-            stringrep += str(current.next.data) + " --> "
+            lst.append(current.next.data)
+            #stringrep += str(current.next.data) + " --> "
             current = current.next
-        return stringrep
+        return str(lst)
 
 
 class CircularList(object):
